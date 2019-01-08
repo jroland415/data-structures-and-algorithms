@@ -13,7 +13,7 @@ const greeting = (word) => {
 };
 
 const speaker = (message, callback) => {
-  return greeting(message);
+  return callback(message);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ const addValues = (arr, value) => {
 
 const addNumbers = (num, arr, times, callback) => {
   for(let i = 0; i < times; i++) {
-    addValues(arr, num);
+    callback(arr, num);
   }
   return arr;
 };
@@ -63,7 +63,7 @@ const removeOne = (num, arr) => {
 
 const removeElements = (arr, callback) => {
   for(let i = 0; i < arr.length; i++) {
-    removeOne(arr[i], arr);
+    callback(arr[i], arr);
   }
   return arr;
 };
@@ -76,7 +76,7 @@ Write a function named removeWithForEach that produces the same output as challe
 
 const removeWithForEach = (arr, callback) => {
   arr.forEach(function(value) {
-    removeOne(value, arr);
+    callback(value, arr);
   });
   return arr;
 };
@@ -92,13 +92,16 @@ This anonymous function should accept up to three arguments: the element, the in
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithAnon = (arr) => {
-  // Solution code here...
-}
+  arr.forEach(function(element, index, arr) {
+    removeOne(element, arr);
+  });
+  return arr;
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
 
-Write a function named createList that takes in an array of the current store intentory.
+Write a function named createList that takes in an array of the current store inventory.
 
 The inventory is formatted like this:
 [
@@ -113,8 +116,14 @@ This function should use forEach to populate your grocery list based on the stor
 ------------------------------------------------------------------------------------------------ */
 
 const createList = (availableItems) => {
-  // Solution code here...
-}
+  let list = [];
+  availableItems.forEach(function(element) {
+    if (element.available === true) {
+      list.push(element.name);
+    }
+  });
+  return list;
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
