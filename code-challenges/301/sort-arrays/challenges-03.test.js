@@ -180,7 +180,13 @@ You DO NOT need to use your solution to Challenge 9 in completing Challenge 10.
 ------------------------------------------------------------------------------------------------ */
 
 const sortSchedule = (arr) => {
-  // Solution code here...
+  let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  arr.sort( (a,b) => {
+    if (a.dayOfWeek !== b.dayOfWeek) return days.indexOf(a.dayOfWeek) - days.indexOf(b.dayOfWeek);
+    else if (a.start !== b.start) return a.start - b.start;
+    else return ((a.end-a.start) - (b.end-b.start));
+  });
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
