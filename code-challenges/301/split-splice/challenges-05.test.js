@@ -15,7 +15,9 @@ For example, if the input is 'Welcome', the output will be:
 
 const howMuchPencil = (str) => {
   let result = [];
-  // Solution code here...
+  for (let i = 0; i < str.length + 1; i++) {
+    result.push(str.slice(i,str.length + 1));
+  }
   return result;
 };
 
@@ -28,7 +30,8 @@ For example, wordsToCharList('gregor') returns ['g','r','e','g','o','r'].
 ------------------------------------------------------------------------------------------------ */
 
 const wordsToCharList = (arr) => {
-  // Solution code here...
+  let splitWord = arr.split('');
+  return splitWord;
 };
 
 
@@ -75,9 +78,13 @@ const gruffaloCrumble = {
 
 const listFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+  let regex = /\d+\s\w+\S?\w+\s/gmi;
+  recipe.ingredients.forEach( str => {
+    let sliceIndex = str.match(regex)[0].length;
+    result.push(str.slice(sliceIndex));
+  });
   return result;
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -89,9 +96,18 @@ You may also use other string or array methods.
 
 const splitFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+  let regex = /\d+\s\w+\S?\w+\s/gmi;
+  let tempArr = [];
+  recipe.ingredients.forEach( str => {
+    //let sliceIndex = str.match(regex)[0].length;
+    tempArr.push(str.split(regex));
+  });
+  tempArr.forEach( arr => {
+    arr.splice(0,1);
+    result.push(arr.join());
+  });
   return result;
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
