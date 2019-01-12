@@ -99,7 +99,6 @@ const splitFoods = (recipe) => {
   let regex = /\d+\s\w+\S?\w+\s/gmi;
   let tempArr = [];
   recipe.ingredients.forEach( str => {
-    //let sliceIndex = str.match(regex)[0].length;
     tempArr.push(str.split(regex));
   });
   tempArr.forEach( arr => {
@@ -121,9 +120,13 @@ Return a new array containing just the verbs. For example, ['Mix until evenly di
 
 const stepActions = (recipe) => {
   let result = [];
-  // Solution code here...
+  let regex = /^\S+/gmi;
+  recipe.steps.forEach( str => {
+    let sliceIndex = str.match(regex)[0].length;
+    result.push(str.slice(0, sliceIndex));
+  });
   return result;
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -139,7 +142,13 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const removeEvenValues = (arr) => {
-  // Solution code here...
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+      arr.splice(i,1);
+      i--;
+    }
+  }
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -158,7 +167,11 @@ removeLastCharacters('Gregor', 9) returns ''
 ------------------------------------------------------------------------------------------------ */
 
 const removeLastCharacters = (str, numberOfCharacters) => {
-  // Solution code here...
+  if (numberOfCharacters <= 0) return str;
+  else if (numberOfCharacters > str.length) return '';
+  else {
+    return str.slice(0, str.length - numberOfCharacters);
+  }
 };
 
 
