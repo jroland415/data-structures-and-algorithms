@@ -98,17 +98,10 @@ hasChildrenValues(characters, 'Eddard') will return false
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenValues = (arr, character) => {
-  arr.forEach(obj => {
-    let charValues = Object.values(obj);
-    if (charValues[0] === character && charValues[2].length > 0) {
-      return true;
-    }
-    else return false;
-    // if (obj.name === character && obj.children.length > 0) {
-    //   return true;
-    // }
-    // else return false;
-  });
+  let charObj = arr.find( char => char.name === character);
+  let childArr = Object.values(charObj)[2];
+  if (childArr.length > 0) return true;
+  else return false;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -120,8 +113,11 @@ The input and output of this function are the same as the input and output from 
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
-  // Solution code here...
-}
+  let charObj = arr.find( char => char.name === character);
+  let entryArr = Object.entries(charObj)[2][1];
+  if (entryArr.length > 0) return true;
+  else return false;
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6 - Stretch Goal
@@ -135,9 +131,18 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 
 const houseSize = (arr) => {
   const sizes = [];
-  // Solution code here...
+  arr.forEach( obj => {
+    let houseObj = {};
+    let adultArr = Object.values(obj);
+    if (adultArr[1] === null) {
+      adultArr.splice(1,1);
+    }
+    houseObj.house = obj.house;
+    houseObj.members = (adultArr.length - 2) + obj.children.length;
+    sizes.push(houseObj);
+  });
   return sizes;
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
@@ -159,9 +164,23 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
   const survivors = [];
-  // Solution code here...
+  arr.forEach( obj => {
+    let houseObj = {};
+    let adultArr = Object.values(obj);
+    if (adultArr[1] === null) {
+      adultArr.splice(1,1);
+    }
+    deceasedSpouses.forEach( spouse => {
+      if (adultArr.includes(spouse)) {
+        adultArr.splice(1,1);
+      }
+    });
+    houseObj.house = obj.house;
+    houseObj.members = (adultArr.length - 2) + obj.children.length;
+    survivors.push(houseObj);
+  });
   return survivors;
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
