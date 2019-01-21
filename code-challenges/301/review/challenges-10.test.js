@@ -48,15 +48,19 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 ------------------------------------------------------------------------------------------------ */
 
 const divisibleByFiveTwoToThePower = (input) => {
-  return input.forEach(array => {
+  let finalArray = input.forEach(array => {
     let arraysByFive = array.reduce((acc, curr) => {
       (curr % 5 === 0) ? acc.push(curr) : acc;
       return acc;
     }, []);
-    let twoToFive = arraysByFive.map(num => Math.pow(2, num));
-    return twoToFive;
+    let twoByFive = arraysByFive.map(num => Math.pow(2, num));
+    return twoByFive;
   });
+  return finalArray;
 };
+
+// let twoToFive = arraysByFive.map(num => Math.pow(2, num));
+//     return twoToFive;
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -118,11 +122,15 @@ let starWarsData = [{
   eye_color: 'brown',
   birth_year: '19BBY',
   gender: 'female'
-}]
+}];
 
 let findMaleAndFemale = (data) => {
-  // Solution code here...
-}
+  let genderedCharacters = data.reduce((acc, curr) => {
+    (curr.gender === 'male' || curr.gender ==='female') ? acc.push(curr.name) : acc;
+    return acc;
+  }, []);
+  return genderedCharacters.join(' and ');
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -131,8 +139,13 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 ------------------------------------------------------------------------------------------------ */
 
 let findShortest = (data) => {
-  // Solution code here...
-}
+  let shortestHeight = data.reduce((acc, curr) => {
+    (curr.height > acc) ? acc = curr.height : acc;
+    return acc;
+  }, 0);
+  let shortIndex = data.findIndex(char => char.height === shortestHeight);
+  return data[shortIndex].name;
+};
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
