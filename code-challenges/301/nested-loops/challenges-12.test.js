@@ -46,9 +46,12 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 
 const salesData = (hours, data) => {
   let formattedData = [];
+  let i =0;
   data.forEach(salesTotal => {
     let salesObject = {};
     salesObject.sales = `${salesTotal} cookies`;
+    salesObject.time = hours[i];
+    i++;
     formattedData.push(salesObject);
   });
   return formattedData;
@@ -74,12 +77,12 @@ const errands = [
 
 const howManyTreats = (arr) => {
   let numTreats = 0;
-  arr.forEach(errand => {
-    errand.items.forEach(item => {
-      item.name === 'Treats' ? numTreats += item.quantity : numTreats;
-    });
-    return numTreats;
-  });
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].items[j]; j++) {
+      arr[i].items[j].name === 'Treats' ? numTreats += arr[i].items[j].quantity : numTreats;
+    }
+  }
+  return numTreats;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -101,8 +104,10 @@ The top row of the board is considered row zero and row numbers increase as they
 ------------------------------------------------------------------------------------------------ */
 
 const battleship = (board, row, col) => {
-  //  Solution code here...
-}
+  if (board[row][col] === '#') {
+    return 'hit';
+  } else return 'miss';
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -113,8 +118,16 @@ For example, the following input returns a product of 720: [[1,2], [3,4], [5,6]]
 ------------------------------------------------------------------------------------------------ */
 
 const calculateProduct = (numbers) => {
-  // Solution code here...
-}
+  let totalProduct = 1;
+  for(let i = 0; i < numbers.length; i++) {
+    if (numbers[i] !== []){
+      for(let j = 0; j < numbers[i].length; j++) {
+        totalProduct = totalProduct * numbers[i][j];
+      }
+    }
+  }
+  return totalProduct;
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -133,8 +146,14 @@ const weeklyTemperatures = [
 ];
 
 const averageDailyTemperature = (weather) => {
-  // Solution code here...
-}
+  let tempTally = 0;
+  for(let i =0; i<weather.length; i++) {
+    for(let j=0; j<weather[i].length; j++) {
+      tempTally += weather[i][j];
+    }
+  }
+  return tempTally/(7*weather.length);
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
@@ -154,8 +173,8 @@ let lowestWeeklyTemperatureData = [
 ];
 
 const lowestWeeklyAverage = (weather) => {
-  // Solution code here...
-}
+
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8
