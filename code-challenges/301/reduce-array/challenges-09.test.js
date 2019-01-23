@@ -84,7 +84,12 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 ------------------------------------------------------------------------------------------------ */
 
 const reversedString = (arr) => {
-  
+  let allLetters = arr.split('');
+  let reverseArray = allLetters.reduce((acc, curr) => {
+    acc.unshift(curr);
+    return acc;
+  }, []);
+  return reverseArray.join('');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -138,9 +143,7 @@ const characters = [
 
 const countNumberOfChildren = (arr) => {
   return arr.reduce((acc, curr) => {
-    if(curr.children) {
-      acc = acc + curr.children.length;
-    }
+    curr.children ? acc = acc + curr.children.length : acc;
     return acc;
   }, 0);
 };
@@ -179,8 +182,11 @@ const isPrime = (value) => {
 };
 
 const countPrimeNumbers = (arr) => {
-  // Solution code here...
-}
+  return arr.reduce((acc, curr) => {
+    (isPrime(curr)) ? acc++ : acc;
+    return acc;
+  }, 0);
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
@@ -222,7 +228,10 @@ const snorlaxData = {
 };
 
 const extractStat = (statName, arr) => {
-  // Solution code here...
+  return arr.reduce((acc, curr) => {
+    (curr.stat.name === statName) ? acc = curr : acc;
+    return acc;
+  }, null);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -236,7 +245,11 @@ Write a function named extractChildren that, given the array of characters from 
 ------------------------------------------------------------------------------------------------ */
 
 const extractChildren = (arr) => {
-  // Solution code here...
+  let letterACharacters = arr.filter(character => character.name.includes('a'));
+  return letterACharacters.reduce((acc, curr) => {
+    curr.children ? acc.concat(curr.children) : acc;
+    return acc;
+  }, []);
 };
 
 /* ------------------------------------------------------------------------------------------------
